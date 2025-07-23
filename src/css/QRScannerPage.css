@@ -1,0 +1,259 @@
+.scanner-container {
+  text-align: center;
+  padding: 20px;
+}
+ 
+.tick-animation {
+  font-size: 100px;
+  color: green;
+  animation: pop 0.5s ease-out;
+}
+ 
+.cross-animation {
+  font-size: 100px;
+  color: red;
+  animation: shake 0.5s ease-out;
+}
+ 
+@keyframes pop {
+  0% { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+ 
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  50% { transform: translateX(10px); }
+  75% { transform: translateX(-10px); }
+  100% { transform: translateX(0); }
+}
+ 
+.scan-result {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #333;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 6px;
+}
+ 
+ 
+.scanner-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+  transition: background 0.3s, color 0.3s;
+}
+ 
+.scanner-card {
+  background: #fff;
+  padding: 2rem 2.5rem;
+  border-radius: 18px;
+  box-shadow: 0 6px 24px rgba(60, 72, 88, 0.12);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+ 
+.scanner-title {
+  margin-bottom: 1.5rem;
+  color: #3b82f6;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+ 
+.scan-result {
+  margin: 1.2rem 0;
+  background: #f1f5f9;
+  padding: 0.8rem;
+  border-radius: 8px;
+}
+ 
+.scan-text {
+  color: #6366f1;
+  font-weight: 500;
+}
+ 
+.feedback {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+ 
+.feedback.success {
+  background: #e0f7fa;
+  color: #059669;
+}
+ 
+.feedback.fail {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+ 
+.icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+ 
+.retry-button {
+  margin-top: 1rem;
+  padding: 0.5rem 1.2rem;
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+ 
+.retry-button:hover {
+  background: #4338ca;
+}
+ 
+.scanner-page.dark {
+  background: linear-gradient(135deg, #18181b 0%, #27272a 100%);
+  color: #f3f4f6;
+}
+ 
+.scanner-header {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 0 0.5rem 0;
+  margin-bottom: 1rem;
+}
+ 
+.header-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+ 
+.back-button, .theme-toggle {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+ 
+.back-button:hover, .theme-toggle:hover {
+  background: #e0e7ff;
+}
+ 
+.scanner-page.dark .back-button:hover,
+.scanner-page.dark .theme-toggle:hover {
+  background: #27272a;
+}
+ 
+.scanner-card {
+  background: #fff;
+  padding: 2rem 2.5rem;
+  border-radius: 18px;
+  box-shadow: 0 6px 24px rgba(60, 72, 88, 0.12);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  transition: background 0.3s, color 0.3s;
+}
+ 
+.scanner-page.dark .scanner-card {
+  background: #23232b;
+  color: #f3f4f6;
+}
+ 
+.scanner-title {
+  margin-bottom: 1.5rem;
+  color: #3b82f6;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+ 
+.scanner-page.dark .scanner-title {
+  color: #818cf8;
+}
+ 
+.scan-result {
+  margin: 1.2rem 0;
+  background: #f1f5f9;
+  padding: 0.8rem;
+  border-radius: 8px;
+}
+ 
+.scanner-page.dark .scan-result {
+  background: #27272a;
+}
+ 
+.scan-text {
+  color: #6366f1;
+  font-weight: 500;
+}
+ 
+.scanner-page.dark .scan-text {
+  color: #818cf8;
+}
+ 
+.feedback {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+ 
+.feedback.success {
+  background: #e0f7fa;
+  color: #059669;
+}
+ 
+.scanner-page.dark .feedback.success {
+  background: #134e4a;
+  color: #a7f3d0;
+}
+ 
+.feedback.fail {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+ 
+.scanner-page.dark .feedback.fail {
+  background: #7f1d1d;
+  color: #fee2e2;
+}
+ 
+.icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+ 
+.retry-button {
+  margin-top: 1rem;
+  padding: 0.5rem 1.2rem;
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+ 
+.retry-button:hover {
+  background: #4338ca;
+}
+ 
