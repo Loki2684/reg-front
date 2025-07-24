@@ -3,95 +3,94 @@ import { QrReader } from 'react-qr-reader';
 import axios from 'axios';
 import '../css/QRScannerPage.css';
  
- const QRScannerPage = () => {
-   const [scanResult, setScanResult] = useState(null);
-     const [status, setStatus] = useState(null);
-       const [theme, setTheme] = useState('light');
-        
-          const handleScan = async (data) => {
-              if (data && data !== scanResult) {
-                    setScanResult(data);
-                          try {
-                                  const response = await axios.post('https://your-api.com/validate', { qrData: data });
-                                          if (response.data.status === 'success') {
-                                                    setStatus('success');
-                                                            } else {
-                                                                      setStatus('fail');
-                                                                              }
-                                                                                    } catch (error) {
-                                                                                            console.error('API error:', error);
-                                                                                                    setStatus('fail');
-                                                                                                          }
-                                                                                                              }
-                                                                                                                };
-                                                                                                                 
-                                                                                                                   const handleError = (err) => {
-                                                                                                                       console.error('QR Scan Error:', err);
-                                                                                                                         };
-                                                                                                                          
-                                                                                                                            const handleRetry = () => {
-                                                                                                                                setScanResult(null);
-                                                                                                                                    setStatus(null);
-                                                                                                                                      };
-                                                                                                                                       
-                                                                                                                                         const handleBack = () => {
-                                                                                                                                             window.history.back();
-                                                                                                                                               };
-                                                                                                                                                
-                                                                                                                                                  const toggleTheme = () => {
-                                                                                                                                                      setTheme(theme === 'light' ? 'dark' : 'light');
-                                                                                                                                                        };
-                                                                                                                                                         
-                                                                                                                                                           return (
-                                                                                                                                                               <div className={`scanner-page ${theme}`}>
-                                                                                                                                                                     <header className="scanner-header">
-                                                                                                                                                                             <button className="back-button" onClick={handleBack}>← Back</button>
-                                                                                                                                                                                     <h1 className="header-title">QR Scanner</h1>
-                                                                                                                                                                                             <button className="theme-toggle" onClick={toggleTheme}>
-                                                                                                                                                                                                       {theme === 'light' ? '🌙' : '☀️'}
-                                                                                                                                                                                                               </button>
-                                                                                                                                                                                                                     </header>
-                                                                                                                                                                                                                           <div className="scanner-card">
-                                                                                                                                                                                                                                   <h2 className="scanner-title">Scan QR Code</h2>
-                                                                                                                                                                                                                                           <QrReader
-                                                                                                                                                                                                                                                     constraints={{ facingMode: 'environment' }}
-                                                                                                                                                                                                                                                               onResult={(result, error) => {
-                                                                                                                                                                                                                                                                           if (!!result) {
-                                                                                                                                                                                                                                                                                         handleScan(result?.text);
-                                                                                                                                                                                                                                                                                                     }
-                                                                                                                                                                                                                                                                                                                 if (!!error) {
-                                                                                                                                                                                                                                                                                                                               handleError(error);
-                                                                                                                                                                                                                                                                                                                                           }
-                                                                                                                                                                                                                                                                                                                                                     }}
-                                                                                                                                                                                                                                                                                                                                                               style={{ width: '100%', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}
-                                                                                                                                                                                                                                                                                                                                                                       />
-                                                                                                                                                                                                                                                                                                                                                                        
-                                                                                                                                                                                                                                                                                                                                                                                {scanResult && (
-                                                                                                                                                                                                                                                                                                                                                                                          <div className="scan-result">
-                                                                                                                                                                                                                                                                                                                                                                                                      <p>
-                                                                                                                                                                                                                                                                                                                                                                                                                    <strong>Scanned Text:</strong> <span className="scan-text">{scanResult}</span>
-                                                                                                                                                                                                                                                                                                                                                                                                                                </p>
-                                                                                                                                                                                                                                                                                                                                                                                                                                          </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                  )}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                   
-                                                                                                                                                                                                                                                                                                                                                                                                                                                           {status === 'success' && (
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                     <div className="feedback success">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 <span className="icon">✔️</span>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             <p>Scan successful!</p>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               )}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        {status === 'fail' && (
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  <div className="feedback fail">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              <span className="icon">❌</span>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <p>Scan failed. Please try again.</p>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      <button onClick={handleRetry} className="retry-button">Retry</button>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        )}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    );
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    };
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     export default QRScannerPage;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+const QRScannerPage = () => {
+  const [scanResult, setScanResult] = useState(null);
+  const [status, setStatus] = useState(null);
+  const [theme, setTheme] = useState('light');
+ 
+  const handleScan = async (data) => {
+    if (data && data !== scanResult) {
+      setScanResult(data);
+      try {
+        const response = await axios.post('https://your-api.com/validate', { qrData: data });
+        if (response.data.status === 'success') {
+          setStatus('success');
+        } else {
+          setStatus('fail');
+        }
+      } catch (error) {
+        console.error('API error:', error);
+        setStatus('fail');
+      }
+    }
+  };
+ 
+  const handleError = (err) => {
+    console.error('QR Scan Error:', err);
+  };
+ 
+  const handleRetry = () => {
+    setScanResult(null);
+    setStatus(null);
+  };
+ 
+  const handleBack = () => {
+    window.history.back();
+  };
+ 
+  const toggleTheme = () => {
+    setTheme(theme === 'light' ? 'dark' : 'light');
+  };
+ 
+  return (
+    <div className={`scanner-page ${theme}`}>
+      <header className="scanner-header">
+        <button className="back-button" onClick={handleBack}>← Back</button>
+        <h1 className="header-title">QR Scanner</h1>
+        <button className="theme-toggle" onClick={toggleTheme}>
+          {theme === 'light' ? '🌙' : '☀️'}
+        </button>
+      </header>
+      <div className="scanner-card">
+        <h2 className="scanner-title">Scan QR Code</h2>
+        <QrReader
+          constraints={{ facingMode: 'environment' }}
+          onResult={(result, error) => {
+            if (!!result) {
+              handleScan(result?.text);
+            }
+            if (!!error) {
+              handleError(error);
+            }
+          }}
+          style={{ width: '100%', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}
+        />
+ 
+        {scanResult && (
+          <div className="scan-result">
+            <p>
+              <strong>Scanned Text:</strong> <span className="scan-text">{scanResult}</span>
+            </p>
+          </div>
+        )}
+ 
+        {status === 'success' && (
+          <div className="feedback success">
+            <span className="icon">✔️</span>
+            <p>Scan successful!</p>
+          </div>
+        )}
+ 
+        {status === 'fail' && (
+          <div className="feedback fail">
+            <span className="icon">❌</span>
+            <p>Scan failed. Please try again.</p>
+            <button onClick={handleRetry} className="retry-button">Retry</button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+ 
+export default QRScannerPage;
